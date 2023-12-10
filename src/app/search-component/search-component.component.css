@@ -1,0 +1,21 @@
+.btn{
+  width: 100%;
+  margin-top: 20px;
+}
+
+.col-md-3{
+  display: inline-block;
+  width: 31.5%;
+  margin: 10px;
+}
+
+.smallInput{
+  width: 93%;
+}
+
+.col-md-5{
+  display: inline-block;
+  width: 15.75%;
+  margin: 6px;
+}
+

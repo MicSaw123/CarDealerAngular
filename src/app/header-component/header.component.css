@@ -1,0 +1,35 @@
+.icon-label{
+  position: absolute;
+  font-size: 32px;
+  margin-top: 8px;
+}
+
+.home-icon{
+  margin: 5px;
+  font-size: 40px;
+  height: 40px;
+  width: 40px;
+}
+
+.btn-header{
+  display: inline-block;
+  float: right;
+  transform: scale(1.2);
+  margin: 15px;
+}
+
+.btn{
+  margin: 5px;
+  float: right;
+}
+
+.link-home{
+  display: inline-block;
+  float: left;
+  width: 15%;
+}
+
+.link{
+  float: left;
+  width: 15%;
+}

@@ -1,0 +1,89 @@
+<div class="container">
+  <form [formGroup]="searchForm">
+    <div class="col-md-3">
+    <label>Manufacturer:</label>
+    <select class="form-select"
+            formControlName="manufacturer"
+            [(ngModel)]="manufacturerId"
+            (change)="onSelectedManufacturer(manufacturerId)"
+    >
+      <option hidden value="" selected disabled>Manufacturer</option>
+      <option *ngFor="let manufacturer of manufacturers"
+              [value]="manufacturer.Id"
+              id="manufacturer"
+      >
+        {{manufacturer.Name}}
+      </option>
+    </select>
+    </div>
+    <div class="col-md-3">
+      <label>Model:</label>
+    <ng-template [ngIf]="manufacturerId <= 0">
+    <select class="form-select" disabled>
+      <option>Model</option>
+    </select>
+    </ng-template>
+    <ng-template [ngIf]="manufacturerId > 0">
+      <select class="form-select" formControlName="model" [(ngModel)]="modelId" (change)="onSelectedModel(modelId)">
+        <option hidden="hidden" selected >Model</option>
+        <option *ngFor="let model of models"
+                id="model"
+                [value]="model.Id"
+                [disabled]="manufacturerId <= 0"
+        >
+          {{model.Name}}
+        </option>
+    </select>
+    </ng-template>
+    </div>
+    <div class="col-md-3">
+      <label>Generation:</label>
+    <ng-template [ngIf]="modelId <= 0">
+      <select class="form-select" disabled>
+        <option>Generation</option>
+      </select>
+    </ng-template>
+    <ng-template [ngIf]="modelId > 0">
+    <select class="form-select" formControlName="generation">
+      <option hidden selected>Generation</option>
+      <option *ngFor="let generation of generations"
+              id="generation"
+              [value]="generation.Id"
+              [disabled]="modelId <= 0"
+      >
+        {{generation.Name}}
+      </option>
+    </select>
+    </ng-template>
+    </div>
+    <hr/>
+    <div class="col-md-5">
+      <label>Start of production:</label>
+      <input formControlName="minDisplacement" type="number" class="form-control smallInput"/>
+    </div>
+    <div class="col-md-5">
+      <label>End of production:</label>
+      <input formControlName="maxDisplacement" type="number" class="form-control smallInput"/>
+    </div>
+    <div class="col-md-5">
+      <label>Minimum displacement:</label>
+      <input formControlName="minYear" type="number" class="form-control smallInput"/>
+    </div>
+    <div class="col-md-5">
+      <label>Maximum displacement:</label>
+      <input type="number" class="form-control smallInput"/>
+    </div>
+    <div class="col-md-5" style="width: 31%!important;">
+    <label>Transmission type:</label>
+    <select class="form-select" formControlName="transmission">
+      <option *ngFor="let transmission of transmissions"
+              id="transmission"
+              [value]="transmission.Id"
+      >
+        {{transmission.Type}}
+      </option>
+    </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+</div>
