@@ -1,0 +1,121 @@
+<div class="container">
+  <app-header-component/>
+    <div class="container-fluid">
+      <div class="row">
+        <h2>{{listing.Title}}</h2>
+      </div>
+    </div>
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-lg-7">
+      <div [id]="listing.Id" class="carousel slide d-flex">
+        <div class="carousel-inner">
+          <div *ngFor="let image of listing?.Images; index as i" [ngClass]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+            <img [src]="'data:image/jpeg;base64,' + image" class="d-block w-100 rounded-3" alt="Slide" style="height: 400px">
+          </div>
+        </div>
+        <button class="carousel-control-prev" role="button" [attr.data-bs-target]="'#' + listing.Id" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" role="button" [attr.data-bs-target]="'#' + listing.Id" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+      <div class="col-xs-12 col-lg-5">
+        <div class="list-group w-100 card">
+          <div class="row">
+            <div class="col-xs-12 col-lg-4 w-50 pb-3 pt-2">
+              <label>Manufacturer: {{listing.ListedCar.ListedCarSpecification.Generation.Model.Manufacturer.Name}}</label>
+            </div>
+            <div class="col-xs-12 col-lg-4 w-50 pb-3 pt-2">
+              <label>Vin: {{listing.IdentifiedVehicles.Vin}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Model: {{listing.ListedCar.ListedCarSpecification.Generation.Model.Name}}</label>
+            </div>
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>First registration date: {{listing.IdentifiedVehicles.FirstRegistrationDate}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Generation: {{listing.ListedCar.ListedCarSpecification.Generation.Name}}</label>
+            </div>
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>License plate: {{listing.ListedCar.LicensePlate}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Chassis: {{listing.ListedCar.ListedCarSpecification.CarType.Name}}</label>
+            </div>
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Production date: {{listing.IdentifiedVehicles.ProductionDate}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Fuel: {{listing.ListedCar.ListedCarSpecification.Engine.FuelType.Name}}</label>
+            </div>
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Mileage: {{listing.ListedCar.Mileage}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Displacement: {{listing.ListedCar.ListedCarSpecification.Engine.Displacement}}ccm</label>
+            </div>
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Color: {{listing.ListedCar.CarColor.Name}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Horsepower: {{listing.ListedCar.ListedCarSpecification.Engine.Horsepower}}hp</label>
+            </div>
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Damage history: {{listing.IdentifiedVehicles.PreviouslyDamaged.Name}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Torque: {{listing.ListedCar.ListedCarSpecification.Engine.Torque}}nm</label>
+            </div>
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Previous owners: {{listing.ListedCar.PreviousOwners}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Transmission: {{listing.ListedCar.ListedCarSpecification.Transmission.Name}}</label>
+            </div>
+            <div class="col-xs-12 col-lg-4 w-50 pb-3">
+              <label>Country of origin: {{listing.IdentifiedVehicles.CountryOfOrigin.Name}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-lg-4 w-50 pb-2">
+              <label>Drivetrain: {{listing.ListedCar.ListedCarSpecification.Drivetrain.Name}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row pt-2" style="height: 500px">
+      <div class="col-xs-12 col-lg-7 d-flex">
+        <div class="card w-100">
+          <div class="card-body">
+            {{listing.Description}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

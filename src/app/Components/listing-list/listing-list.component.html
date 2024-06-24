@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-lg-6" *ngFor="let listing of listings">
+        <app-listing [title]="listing.Title" [id]="listing.Id" [images]="listing.Images"
+                     [productionDate]="listing.IdentifiedVehicles.ProductionDate"
+                     [displacement]="listing.ListedCar.ListedCarSpecification.Engine.Displacement"
+                     [horsepower]="listing.ListedCar.ListedCarSpecification.Engine.Horsepower"
+                     [fuelType]="listing.ListedCar.ListedCarSpecification.Engine.FuelType.Name"
+                     [mileage]="listing.ListedCar.Mileage" [carCondition]="listing.ListedCar.CarCondition.Name">
+        </app-listing>
+    </div>
+    </div>
+</div>

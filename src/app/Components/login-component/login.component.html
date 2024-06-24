@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="col-md-2 mx-auto" style="margin-top: 20%">
+  <form [formGroup]="loginForm">
+    <div class="row">
+      <label>Email:</label>
+      <input type="email" formControlName="Email" class="form-control"/>
+    </div>
+    <div class="row">
+      <label>Password:</label>
+      <input type="password" formControlName="Password" class="form-control"/>
+    </div>
+    <div class="row">
+      <button (click)="LoginUser(loginForm.value)" type="submit" class="btn btn-primary" style="width: 100%; margin-left: 5px; margin-top: 5px" >Login</button>
+    </div>
+  </form>
+    <div class="row justify-content-center" style="text-align: center">
+      <span>Don't have an account?
+          <a routerLink="/register" class="routerLink"> Sign up here!</a>
+        </span>
+      </div>
+      <div class="row justify-content-center" style="text-align: center">
+        <span>Or sign up with: </span>
+      </div>
+      <div class="row" style="text-align: center;">
+        <div class="col-3 ">
+          <i class="bi bi-facebook h2"></i>
+        </div>
+        <div class="col-3 ">
+          <i class="bi bi-google h2"></i>
+        </div>
+        <div class="col-3 ">
+          <i class="bi bi-twitter-x h2"></i>
+        </div>
+        <div class="col-3 ">
+          <i class="bi bi-apple h2"></i>
+        </div>
+      </div>
+  </div>
+</div>

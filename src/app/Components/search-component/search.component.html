@@ -1,0 +1,180 @@
+<div class="container">
+  <form [formGroup]="searchForm">
+    <div class="row">
+      <div class="col-xs-12 col-lg-2">
+        <label>Condition:</label>
+        <select class="form-select" formControlName="carCondition" [(ngModel)]="carConditionId">
+          <option *ngFor="let carCondition of basicProperties.CarCondition" [value]="carCondition.Id">
+            {{carCondition.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Country of origin:</label>
+        <select class="form-select" formControlName="countryOfOrigin" [(ngModel)]="countryOfOriginId">
+          <option *ngFor="let country of basicProperties.Country" [value]="country.Id">
+            {{country.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Chassis:</label>
+        <select class="form-select"
+                formControlName="carType"
+                [(ngModel)]="carTypeId">
+          <option *ngFor="let carType of basicProperties.CarType"
+                  [value]="carType.Id"
+                  id="carType">
+            {{carType.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Door quantity:</label>
+        <select class="form-select" formControlName="doorQuantity" [(ngModel)]="doorQuantityId">
+          <option *ngFor="let doorQuantity of basicProperties.DoorQuantity" [value]="doorQuantity.Id">
+            {{doorQuantity.Doors}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Fuel:</label>
+        <select class="form-select" formControlName="fuelType" [(ngModel)]="fuelTypeId" >
+          <option *ngFor="let fuelType of basicProperties.FuelType"
+                  id="fuelType"
+                  [value]="fuelType.Id"
+          >
+            {{fuelType.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Transmission type:</label>
+        <select class="form-select" formControlName="transmission">
+          <option *ngFor="let transmission of basicProperties.Transmission"
+                  id="transmission"
+                  [value]="transmission.Id"
+          >
+            {{transmission.Name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-lg-2">
+        <label>Color:</label>
+        <select class="form-select" formControlName="carColor" [(ngModel)]="carColorId">
+          <option *ngFor="let carColor of basicProperties.CarColor" [value]="carColor.Id">
+            {{carColor.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Manufacturer:</label>
+        <select class="form-select"
+                formControlName="manufacturer"
+                [(ngModel)]="manufacturerId"
+                (change)="onSelectedManufacturer(manufacturerId)"
+        >
+          <option hidden value="" selected disabled>Manufacturer</option>
+          <option *ngFor="let manufacturer of basicProperties.Manufacturer"
+                  [value]="manufacturer.Id"
+                  id="manufacturer"
+          >
+            {{manufacturer.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Model:</label>
+        <ng-container *ngIf="manufacturerId === 0; then emptyManufacturer; else modelList"></ng-container>
+        <ng-template #emptyManufacturer>
+          <select class="form-select" disabled>
+            <option>Model</option>
+          </select>
+        </ng-template>
+        <ng-template #modelList>
+          <select class="form-select" formControlName="model" [(ngModel)]="modelId" (change)="onSelectedModel(modelId)">
+            <option hidden="hidden" selected >Model</option>
+            <option *ngFor="let model of models"
+                    id="model"
+                    [value]="model.Id"
+                    [disabled]="manufacturerId <= 0"
+            >
+              {{model.Name}}
+            </option>
+          </select>
+        </ng-template>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Generation:</label>
+        <ng-container *ngIf="modelId === 0; then emptyModel; else generationList"/>
+        <ng-template #emptyModel>
+          <select class="form-select" disabled>
+            <option>Generation</option>
+          </select>
+        </ng-template>
+        <ng-template #generationList>
+          <select class="form-select" formControlName="generation">
+            <option hidden selected>Generation</option>
+            <option *ngFor="let generation of generations"
+                    id="generation"
+                    [value]="generation.Id"
+                    [disabled]="modelId <= 0"
+            >
+              {{generation.Name}}
+            </option>
+          </select>
+        </ng-template>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Start of production:</label>
+        <input formControlName="minYearOfProduction" type="number" class="form-control"/>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>End of production:</label>
+        <input formControlName="maxYearOfProduction" type="number" class="form-control"/>
+    </div>
+    </div>
+    <hr>
+      <div class="row">
+        <div class="col-xs-12 col-lg-2">
+          <label>Minimum displacement:</label>
+          <input formControlName="minDisplacement" type="number" class="form-control smallInput"/>
+        </div>
+        <div class="col-xs-12 col-lg-2">
+          <label>Maximum displacement:</label>
+          <input formControlName="maxDisplacement" type="number" class="form-control smallInput"/>
+        </div>
+        <div class="col-xs-12 col-lg-2">
+          <label>Cylinders: </label>
+          <select class="form-select" formControlName="cylinders" [(ngModel)]="cylinderId">
+            <option>
+            </option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-lg-2">
+          <label>Horsepower from:</label>
+          <input class="form-control" type="number" formControlName="minimumHorsepower">
+        </div>
+        <div class="col-xs-12 col-lg-2">
+          <label>Horsepower to:</label>
+          <input class="form-control" type="number" formControlName="maximumHorsepower">
+        </div>
+        <div class="col-xs-12 col-lg-2">
+          <label>Search by keywords:</label>
+          <textarea formControlName="description"  class="form-control h-25"></textarea>
+        </div>
+    <hr>
+    <div class="row">
+       <div class="col">
+         <button type="submit" class="btn btn-primary w-100">
+            Search
+         </button>
+       </div>
+    </div>
+      </div>
+  </form>
+  <app-listing-component-list></app-listing-component-list>
+</div>

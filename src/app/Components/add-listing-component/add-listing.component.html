@@ -1,0 +1,248 @@
+<div class="container">
+  <app-header-component/>
+  <form [formGroup]="addListingForm">
+    <div class="row justify-content-between">
+      <div class="col-xs-12 col-lg-2">
+        <label>Title:</label>
+        <input [(ngModel)]="listing.Title" type="text" class="input-group-text w-100" id="title" formControlName="title">
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Condition:</label>
+        <select class="form-select" [(ngModel)]="listing.ListedCar.CarConditionId" formControlName="condition">
+          <option *ngFor="let carCondition of basicProperties?.CarCondition" [value]="carCondition.Id" id="carCondition">
+            {{carCondition.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Production date:</label>
+        <input [(ngModel)]="listing.IdentifiedVehicles.ProductionDate" type="date" class="input-group-text w-100"
+               id="productionDate" formControlName="productionDate">
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Mileage:</label>
+        <input [(ngModel)]="listing.ListedCar.Mileage" type="text" class="input-group-text w-100" id="mileage" formControlName="mileage">
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Country of origin:</label>
+        <select class="form-select" [(ngModel)]="listing.IdentifiedVehicles.CountryOfOriginId" formControlName="countryOfOrigin">
+          <option *ngFor="let country of basicProperties?.Country" [value]="country.Id" id="countryOfOrigin">
+            {{country.Name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-lg-4">
+        <label>VIN:</label>
+        <input [(ngModel)]="listing.IdentifiedVehicles.Vin" type="text" class="input-group-text" formControlName="vin" id="vin" style="width: 100%">
+      <label></label>
+      </div>
+      <div class="col-xs-12 col-lg-4">
+        <label>First registration date:</label>
+        <input [(ngModel)]="listing.IdentifiedVehicles.FirstRegistrationDate" type="date" class="input-group-text w-100" id="firstRegistrationDate" formControlName="firstRegistrationDate">
+      </div>
+      <div class="col-xs-12 col-lg-4">
+        <label>License plate:</label>
+        <input [(ngModel)]="listing.ListedCar.LicensePlate" type="text" class="input-group-text w-100" id="licensePlate" formControlName="licensePlate">
+      </div>
+    </div>
+    <hr>
+    <div class="row justify-content-between">
+      <div class="col-xs-12 col-lg-2">
+        <label>Manufacturer:</label>
+        <select class="form-select"
+                formControlName="manufacturer"
+                [(ngModel)]="manufacturerId"
+                (change)="onSelectedManufacturer(manufacturerId)"
+        >
+          <option hidden value="" selected disabled>Manufacturer</option>
+          <option *ngFor="let manufacturer of basicProperties?.Manufacturer"
+                  [value]="manufacturer.Id"
+                  id="manufacturer"
+          >
+            {{manufacturer.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2" >
+        <label>Model:</label>
+      <ng-container *ngIf="manufacturerId === 0; then emptyManufacturer; else manufacturerList"></ng-container>
+        <ng-template #emptyManufacturer>
+        <select class="form-select" disabled>
+          <option>Model</option>
+        </select>
+        </ng-template>
+      <ng-template #manufacturerList>
+        <select formControlName="model" class="form-select" [(ngModel)]="modelId" (change)="onSelectedModel(modelId)">
+          <option hidden="hidden" selected >Model</option>
+          <option *ngFor="let model of models"
+                  id="model"
+                  [value]="model.Id"
+                  [disabled]="manufacturerId <= 0"
+          >
+            {{model.Name}}
+          </option>
+        </select>
+      </ng-template>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Generation:</label>
+        <ng-container *ngIf="modelId === 0; then generationEmpty; else generationList"></ng-container>
+        <ng-template #generationEmpty>
+          <select class="form-select" disabled>
+            <option>Generation</option>
+          </select>
+        </ng-template>
+        <ng-template #generationList>
+          <select formControlName="generation" class="form-select" [(ngModel)]="listing.ListedCar.ListedCarSpecification.GenerationId">
+            <option hidden selected>Generation</option>
+            <option *ngFor="let generation of generations"
+                    id="generation"
+                    [value]="generation.Id"
+                    [disabled]="modelId <= 0"
+            >
+              {{generation.Name}}
+            </option>
+          </select>
+        </ng-template>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Chassis:</label>
+        <select class="form-select"
+                [(ngModel)]="listing.ListedCar.ListedCarSpecification.CarTypeId"
+                formControlName="carType"
+        >
+          <option *ngFor="let carType of basicProperties?.CarType"
+                  [value]="carType.Id"
+                  id="carType">
+            {{carType.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Color:</label>
+        <select formControlName="carColor" class="form-select" [(ngModel)]="listing.ListedCar.CarColorId">
+          <option *ngFor="let carColor of basicProperties?.CarColor"
+          id="carColor" [value]="carColor.Id">
+            {{carColor.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <label>Door quantity:</label>
+        <select formControlName="doorQuantity" class="form-select" [(ngModel)]="listing.ListedCar.ListedCarSpecification.DoorQuantityId">
+          <option *ngFor="let doorQuantity of basicProperties?.DoorQuantity" id="doorQuantity" [value]="doorQuantity.Id">
+            {{doorQuantity.Doors}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-lg-3">
+        <label>Fuel:</label>
+        <select class="form-select" [(ngModel)]="fuelTypeId" formControlName="fuelType">
+          <option *ngFor="let fuelType of basicProperties?.FuelType"
+                  id="fuelType"
+                  [value]="fuelType.Id"
+          >
+            {{fuelType.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-3">
+        <label>Engine:</label>
+        <select class="form-select"
+                formControlName="engine"
+                [(ngModel)]="listing.ListedCar.ListedCarSpecification.EngineId">
+          <option *ngFor="let engine of engines"
+                  [value]="engine.Id"
+                  id="engine">
+            {{engine.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-3">
+        <label>Transmission type:</label>
+        <select class="form-select" formControlName="transmission" [(ngModel)]="listing.ListedCar.ListedCarSpecification.TransmissionId">
+          <option hidden value="" selected disabled></option>
+          <option *ngFor="let transmission of basicProperties?.Transmission"
+                  id="transmission"
+                  [value]="transmission.Id"
+          >
+            {{transmission.Name}}
+          </option>
+        </select>
+      </div>
+    <div class="col-xs-12 col-lg-3">
+      <label>Drivetrain:</label>
+      <select class="form-select" formControlName="drivetrain" [(ngModel)]="listing.ListedCar.ListedCarSpecification.DrivetrainId">
+        <option hidden value="" selected disabled></option>
+        <option *ngFor="let drivetrain of basicProperties?.Drivetrain"
+                id="drivetrain"
+                [value]="drivetrain.Id"
+        >
+          {{drivetrain.Name}}
+        </option>
+      </select>
+    </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-lg-3">
+        <label>Previously damaged:</label>
+        <select class="form-select" id="damageHistory" [(ngModel)]="listing.IdentifiedVehicles.PreviouslyDamagedId" formControlName="previouslyDamaged">
+          <option *ngFor="let prevDamaged of previouslyDamaged" [value]="prevDamaged.Id" id="previouslyDamaged">
+            {{prevDamaged.Name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-lg-3">
+        <label>Previous owners:</label>
+        <input [(ngModel)]="listing.ListedCar.PreviousOwners" type="number" class="input-group-text w-100" id="previousOwners" formControlName="previousOwners">
+      </div>
+      <div class="col-xs-12 col-lg-6">
+        <label>Images:</label>
+        <input formControlName="images" type="file" accept="image/jpeg" multiple class="form-control"
+               (change)="onFileSelect($event)" style="height: 60%"/>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-xs-12 col-lg-6">
+        <label>Description:</label>
+        <textarea [(ngModel)]="listing.Description" class="form-control" style="height: 400px" id="description" formControlName="description"></textarea>
+      </div>
+      <div class="col-xs-12 col-lg-6">
+        <label>Preview images:</label>
+          <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-inner">
+              <div *ngFor="let image of images; index as i">
+                <div [ngClass]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+                  <img [src]="getImageUrl(image)" class="d-block w-100" alt="Slide" style="height: 400px">
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-primary w-100" (click)="addListing(listing)">
+          Add listing
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

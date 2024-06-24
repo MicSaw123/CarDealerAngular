@@ -1,0 +1,103 @@
+<div class="container-fluid">
+  <div class="col-4 mx-auto" >
+    <form [formGroup]="registerForm">
+      <div class="row">
+          <div class="col-xs-12 col-lg-6">
+            <label>Email:</label>
+            <input formControlName="Email" type="email" class="form-control"
+            [class.is-invalid]="isSubmitted && registerForm.get('Email')?.errors">
+            <span class="text-danger" *ngIf="isSubmitted && registerForm.get('Email')?.hasError('required')">
+              Email is required
+            </span>
+          </div>
+        <div class="col-xs-12 col-lg-6">
+          <label>Username:</label>
+          <input formControlName="Username" class="form-control">
+        </div>
+        </div>
+      <div class="row">
+        <div class="col-xs-12 col-lg-6">
+          <label>Password</label>
+          <input formControlName="Password" type="password" class="form-control">
+        </div>
+        <div class="col-xs-12 col-lg-6">
+          <label>Repeat password:</label>
+          <input formControlName="ConfirmedPassword" type="password" class="form-control">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-lg-4">
+          <label>Country:</label>
+          <select
+                   class="form-select"
+                   formControlName="Country"
+                   [(ngModel)]="countryId"
+                   (change)="onSelectedCountry(countryId)">
+            <option hidden value="" selected disabled>Country</option>
+            <option *ngFor="let country of countries" [value]="country.Id" id="country">
+              {{country.Name}}
+            </option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-lg-4">
+          <label>City:</label>
+          <ng-container *ngIf="countryId === 0; then emptyCities; else listCities"></ng-container>
+          <ng-template #emptyCities>
+            <select disabled class="form-select">
+              <option></option>
+            </select>
+          </ng-template>
+          <ng-template #listCities>
+            <select (change)="getZipCode(cityId)" [(ngModel)]="cityId" formControlName="City" class="form-select">
+              <option hidden value="" selected disabled></option>
+              <option *ngFor="let city of cities" [value]="city.Id" id="city">
+                {{city.Name}}
+              </option>
+            </select>
+          </ng-template>
+        </div>
+        <div class="col-xs-12 col-lg-4">
+          <label>Zip-Code:</label>
+          <ng-container *ngIf="cityId === 0; then emptyZipCodes; else listZipCodes"></ng-container>
+          <ng-template #emptyZipCodes>
+            <select disabled class="form-select">
+              <option></option>
+            </select>
+          </ng-template>
+          <ng-template #listZipCodes>
+            <select formControlName="ZipCode"
+                    class="form-select">
+              <option hidden value="" selected disabled>City</option>
+              <option [value]="zipCode" id="zipCode">
+                {{zipCode}}
+              </option>
+            </select>
+          </ng-template>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-lg-6">
+          <label>Account type:</label>
+          <select formControlName="AccountType" class="form-select">
+            <option>
+              Private seller
+            </option>
+            <option>
+              Company
+            </option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+        <label>Phone number:</label>
+        <input formControlName="PhoneNumber" class="form-control" (keypress)="($event.charCode >= 48 && $event.charCode < 58)" maxlength="9" minlength="9">
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <label style="color: white">.</label>
+          <button (click)="RegisterUser()" class="btn btn-primary" type="submit">Register here!</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

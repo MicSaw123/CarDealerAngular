@@ -1,0 +1,25 @@
+label{
+  margin: 5px;
+}
+
+.form-control{
+  margin: 5px;
+}
+
+
+.bi-google{
+  color: green;
+}
+
+.bi-facebook{
+  color: blue;
+}
+
+.routerLink{
+  text-decoration: none;
+  color: red;
+}
+
+
+
+

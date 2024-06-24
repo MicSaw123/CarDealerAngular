@@ -1,0 +1,57 @@
+<div class="container-fluid p-4">
+      <div [id]="id" class="carousel slide">
+        <div class="carousel-inner">
+          <div *ngFor="let image of images; index as i" [ngClass]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+            <img [src]="'data:image/jpeg;base64,' + image" class="d-block w-100 rounded-3" alt="Slide" style="height: 400px"
+                 (click)="onSelect(id)">
+          </div>
+        </div>
+        <button class="carousel-control-prev" role="button" [attr.data-bs-target]="'#' + id" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" role="button" [attr.data-bs-target]="'#' + id" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+        <div class="list-group">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="list-group-item">
+                <label>{{title}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12 col-lg-6 d-flex list-group-item">
+                <label>Condition: {{carCondition}}</label>
+              </div>
+              <div class="list-group-item col-xs-12 col-lg-6 d-flex">
+                <label>Fuel Type: {{fuelType}}</label>
+              </div>
+            </div>
+          </div>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-12 col-lg-6 d-flex list-group-item">
+                  <label>Production Date: {{productionDate}}</label>
+                </div>
+                <div class="col-xs-12 col-lg-6 d-flex list-group-item">
+                  <label>Displacement: {{displacement}}ccm</label>
+                </div>
+              </div>
+            </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="list-group-item col-xs-12 col-lg-6 d-flex">
+                <label>Mileage: {{mileage}}km</label>
+              </div>
+              <div class="list-group-item col-xs-12 col-lg-6 d-flex">
+                <label>Horsepower: {{horsepower}}hp</label>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="container border-bottom border-secondary-subtle pb-2 pt-2">
+        <div class="d-flex flex-md-row align-items-center">
+          <a class="d-flex align-items-center text-dark text-decoration-none" (click)="goToHome()">
+            <span class="fs-4">Home</span>
+          </a>
+          <ng-container *ngIf="localStorage.getItem('Token') === null; then notLogged; else logged"></ng-container>
+          <ng-template #notLogged>
+            <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+              <a class="btn btn-outline-success p-2" (click)="goToLogin()">Login</a>
+              <a class="btn btn-outline-success p-2" (click)="goToRegister()">Register</a>
+            </nav>
+          </ng-template>
+          <ng-template #logged>
+            <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+              <ng-container *ngIf="currentUrl === '/add-listing'; then addListingHeader; else regularHeader"></ng-container>
+              <ng-template #regularHeader>
+                <a class="btn btn-outline-info p-2" (click)="goToAddListing()">List your car</a>
+              </ng-template>
+              <ng-template #addListingHeader>
+
+              </ng-template>
+              <ng-container *ngIf="currentUrl === '/profile/' + localStorage.getItem('Token'); then profileHeader; else header"></ng-container>
+              <ng-template #header>
+                <a [ngClass]="currentUrl?.length > 30 ? 'invisible' : 'btn btn-outline-info p-2'"
+                   (click)="goToProfileManagement(localStorage.getItem('Token'))">Profile</a>
+              </ng-template>
+              <ng-template #profileHeader>
+
+              </ng-template>
+              <a class="btn btn-outline-success p-2" (click)="Logout()">Logout</a>
+            </nav>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+</div>
+
