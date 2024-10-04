@@ -7,6 +7,7 @@ import {TransmissionDto} from "./TransmissionDto";
 import {CarConditionDto} from "./CarConditionDto";
 import {ManufacturerDto} from "./ManufacturerDto";
 import {DrivetrainDto} from "./DrivetrainDto";
+import {PreviouslyDamagedDto} from "./PreviouslyDamagedDto";
 
 export class GetBasicPropertiesDto {
   Id?: number;
@@ -28,4 +29,6 @@ export class GetBasicPropertiesDto {
   Manufacturer?: ManufacturerDto[];
 
   Drivetrain?: DrivetrainDto[];
+
+  PreviouslyDamaged?: PreviouslyDamagedDto[];
 }

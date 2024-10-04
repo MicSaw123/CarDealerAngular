@@ -1,0 +1,20 @@
+<div class="container">
+  <form [formGroup]="carColorForm">
+    <div class="row">
+      <div class="col-lg-7 col-sm-12 mb-1">
+        <label>Color name:</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2 col-sm-12 mb-1">
+        <input class="form-control" formControlName="Name" [(ngModel)]="carColor.Name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-7 col-sm-12 mb-1">
+        <button type="button" class="btn btn-danger" (click)="addCarColor(carColor)">Add car color</button>
+      </div>
+    </div>
+  </form>
+</div>
+

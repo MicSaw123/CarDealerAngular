@@ -29,7 +29,8 @@ export class ListingPageComponent {
       error: (response: ErrorResponse) =>{
         console.log(response)
       }
-    })
+    });
+    console.log(this.listing.Images);
   }
 
   handleGetListingsById(response: SuccessResponse<GetListingsDto>){

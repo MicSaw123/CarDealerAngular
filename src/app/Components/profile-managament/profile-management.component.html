@@ -1,0 +1,30 @@
+<div class="container">
+  <app-header-component/>
+  <div class="container-fluid">
+    <div class="row justify-content-center pt-2">
+      <div class="col-sm-12 col-lg-2">
+        <button class="btn btn-info" (click)="isActive = 0">Active listings</button>
+      </div>
+      <div class="col-sm-12 col-lg-2">
+        <button class="btn btn-info" (click)="isActive = 1">Inactive listings</button>
+      </div>
+      <div class="col-sm-12 col-lg-2">
+        <button class="btn btn-info" (click)="isActive = 2">Manage profile</button>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-12 col-lg-12 pt-2">
+      <ng-container *ngIf="isActive === 0; then active"/>
+      <ng-template #active>
+        <app-manage-listings [listings]="activeListings"/>
+      </ng-template>
+      <ng-container *ngIf="isActive === 1; then inactive"/>
+      <ng-template #inactive>
+        <app-manage-listings [listings]="inactiveListings"/>
+      </ng-template>
+      <ng-container *ngIf="isActive === 2; then profileManagement"/>
+      <ng-template #profileManagement>
+        <app-manage-profile [userInfo]="userInfo"/>
+      </ng-template>
+    </div>
+</div>

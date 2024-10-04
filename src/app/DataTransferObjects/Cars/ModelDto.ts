@@ -5,5 +5,7 @@ export class ModelDto{
 
   Name = '';
 
+  ManufacturerId = 0;
+
   Manufacturer = new ManufacturerDto();
 }

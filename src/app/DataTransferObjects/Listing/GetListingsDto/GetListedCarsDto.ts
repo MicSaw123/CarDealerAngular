@@ -3,6 +3,8 @@ import {CarConditionDto} from "../../Cars/CarConditionDto";
 import {GetListedCarSpecificationsDto} from "./GetListedCarSpecificationsDto";
 
 export class GetListedCarsDto{
+  Id = 0;
+
   LicensePlate = '';
 
   PreviousOwners = 0;

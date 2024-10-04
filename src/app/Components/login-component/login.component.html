@@ -1,39 +1,88 @@
-<div class="container-fluid">
-  <div class="col-md-2 mx-auto" style="margin-top: 20%">
-  <form [formGroup]="loginForm">
-    <div class="row">
-      <label>Email:</label>
-      <input type="email" formControlName="Email" class="form-control"/>
-    </div>
-    <div class="row">
-      <label>Password:</label>
-      <input type="password" formControlName="Password" class="form-control"/>
-    </div>
-    <div class="row">
-      <button (click)="LoginUser(loginForm.value)" type="submit" class="btn btn-primary" style="width: 100%; margin-left: 5px; margin-top: 5px" >Login</button>
-    </div>
-  </form>
-    <div class="row justify-content-center" style="text-align: center">
-      <span>Don't have an account?
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="col-xs-12 col-lg-3">
+      <form [formGroup]="loginForm">
+        <div class="row">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-lg">
+                <label>Email:</label>
+                <input type="email" class="form-control" formControlName="Email">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-lg">
+                <label>Password:</label>
+                <div class="input-group">
+                  <input [type]="passwordVisibility? 'text' : 'password'" formControlName="Password" class="form-control">
+                  <span class="input-group-text" (click)="togglePasswordVisibility()">
+                  <ng-container *ngIf="passwordVisibility; then visible; else hidden"></ng-container>
+                  <ng-template #visible>
+                    <i-bs name="eye-slash"></i-bs>
+                  </ng-template>
+                  <ng-template #hidden>
+                    <i-bs name="eye"></i-bs>
+                  </ng-template>
+                </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-lg">
+                <button (click)="LoginUser()" type="submit" class="btn btn-primary w-100 mt-2">Login</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-lg justify-content-center" style="text-align: center">
+          <span>Don't have an account?
           <a routerLink="/register" class="routerLink"> Sign up here!</a>
-        </span>
+          </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-lg-12 justify-content-center" style="text-align: center">
+                <span>Or sign in with:</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-lg-12">
+                <div class="row" style="text-align: end">
+                  <div class="col-xs-12 col-lg-3">
+                    <i class="bi bi-facebook h2" style="color: blue"></i>
+                  </div>
+                  <div class="col-xs-12 col-lg-3">
+                    <i class="bi bi-google h2" style="color: green"></i>
+                  </div>
+                  <div class="col-xs-12 col-lg-3">
+                    <i class="bi bi-twitter-x h2"></i>
+                  </div>
+                  <div class="col-xs-12 col-lg-3">
+                    <i class="bi bi-apple h2"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="row justify-content-center" style="text-align: center">
-        <span>Or sign up with: </span>
-      </div>
-      <div class="row" style="text-align: center;">
-        <div class="col-3 ">
-          <i class="bi bi-facebook h2"></i>
-        </div>
-        <div class="col-3 ">
-          <i class="bi bi-google h2"></i>
-        </div>
-        <div class="col-3 ">
-          <i class="bi bi-twitter-x h2"></i>
-        </div>
-        <div class="col-3 ">
-          <i class="bi bi-apple h2"></i>
-        </div>
-      </div>
-  </div>
+    </div>
 </div>

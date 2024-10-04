@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {ListingApiService} from "../../CarDealerAngular.ApiHandlers/Listings/ListingApi.service";
 import {SuccessResponse} from "../../Responses/SuccessResponse";
 import {ErrorResponse} from "../../Responses/ErrorResponse";
@@ -11,6 +11,7 @@ import {GetListingsDto} from "../../DataTransferObjects/Listing/GetListingsDto/G
 })
 export class ListingListComponent implements OnInit{
   listings: GetListingsDto[] = [];
+  @Input() filteredListings: GetListingsDto[] = [];
 
   constructor(private listingService: ListingApiService) {
   }
@@ -19,7 +20,7 @@ export class ListingListComponent implements OnInit{
     this.listingService.GetListings().subscribe({
       next: (response: SuccessResponse<GetListingsDto[]>) =>{
         this.handleGetListings(response);
-      },
+        },
       error: (response: ErrorResponse) =>{
         console.log(response)
       }

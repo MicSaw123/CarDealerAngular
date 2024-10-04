@@ -6,9 +6,9 @@ import {LoginToken} from "../../Models/Identity/LoginToken";
 import { environment } from "src/environments/environment.development";
 import {Observable, catchError, throwError } from "rxjs";
 import {RegisterDto} from "../../DataTransferObjects/Identity/RegisterDto";
+import {UserInfoDto} from "../../DataTransferObjects/Identity/UserInfoDto";
 
 @Injectable()
-
 export class IdentityApiService {
   constructor(private apiRequests: BaseApiRequestsService) {
   }
@@ -25,6 +25,14 @@ export class IdentityApiService {
 
   Register(register: RegisterDto){
     return this.apiRequests.post<SuccessResponse<null>>("Identity/Register", register);
+  }
+
+  GetUserInfoById(id: number){
+    return this.apiRequests.get<SuccessResponse<UserInfoDto>>("Identity/GetUserInfoById?id=" + id);
+  }
+
+  UpdateAccountDetails(UserInfoDto: UserInfoDto){
+    return this.apiRequests.put<SuccessResponse<null>>("Identity/UpdateAccountDetails", UserInfoDto);
   }
 
   private formatErrors(error:any): Observable<any> {

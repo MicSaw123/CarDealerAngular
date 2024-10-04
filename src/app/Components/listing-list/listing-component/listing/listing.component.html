@@ -1,8 +1,8 @@
-<div class="container-fluid p-4">
+<div class="container-fluid pt-2">
       <div [id]="id" class="carousel slide">
         <div class="carousel-inner">
           <div *ngFor="let image of images; index as i" [ngClass]="i === 0 ? 'carousel-item active' : 'carousel-item'">
-            <img [src]="'data:image/jpeg;base64,' + image" class="d-block w-100 rounded-3" alt="Slide" style="height: 400px"
+            <img [src]="'data:image/jpeg;base64,' + image.Image" class="d-block w-100 rounded-3" alt="Slide" style="height: 400px"
                  (click)="onSelect(id)">
           </div>
         </div>
@@ -50,6 +50,13 @@
               </div>
               <div class="list-group-item col-xs-12 col-lg-6 d-flex">
                 <label>Horsepower: {{horsepower}}hp</label>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row h-25">
+              <div style="height: 25%" class="list-group-item col-xs-12 d-flex">
+                <label style="font-size: small">Added: {{dateOfCreation}}</label>
               </div>
             </div>
           </div>

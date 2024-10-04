@@ -9,12 +9,8 @@ export class RegisterDto{
 
   ConfirmedPassword: string = '';
 
-  Country: string = '';
+  CityId = 0;
 
-  City: string = '';
-
-  ZipCode: string = '';
-
-  AccountType: string = '';
+  AccountTypeId = 0;
 
 }

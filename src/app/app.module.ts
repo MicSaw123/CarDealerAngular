@@ -28,7 +28,6 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {Routes, RouterOutlet, RouterLink, RouterModule} from "@angular/router";
 import {EngineApiService} from "./CarDealerAngular.ApiHandlers/Cars/EngineApi.service";
 import {ListingApiService} from "./CarDealerAngular.ApiHandlers/Listings/ListingApi.service";
-import { CommonModule } from '@angular/common';
 import {PreviouslyDamagedApiService} from "./CarDealerAngular.ApiHandlers/Cars/PreviouslyDamagedApi.service";
 import { BrowserModule } from '@angular/platform-browser';
 import {IdentityApiService} from "./CarDealerAngular.ApiHandlers/Identity/IdentityApi.service";
@@ -36,15 +35,31 @@ import { ListingListComponent } from './Components/listing-list/listing-list.com
 import { ListingComponent } from './Components/listing-list/listing-component/listing/listing.component';
 import {GetBasicPropertiesApiService} from "./CarDealerAngular.ApiHandlers/GetBasicProperties/GetBasicPropertiesApi.service";
 import { ListingPageComponent } from './Components/listing-page-component/listing-page/listing-page.component';
-import {ProfileManagementComponent} from "./Components/profile-managament/profile-management/profile-management.component";
+import {ProfileManagementComponent} from "./Components/profile-managament/profile-management.component";
+import {UpdateListingComponent} from "./Components/update-listing-component/update-listing.component";
+import {GetListingDtoResolver} from "./Resolvers/GetListingDtoResolver";
+import {BasicPropertiesResolver} from "./Resolvers/BasicPropertiesResolver";
+import { CommonModule } from '@angular/common';
+import { CarcolorComponent } from './Components/carcolor/carcolor.component';
+import {CarColorApiService} from "./CarDealerAngular.ApiHandlers/Cars/CarColorApi.service";
+import { ManageListingsComponent } from './Components/profile-managament/manage-listings/manage-listings.component';
+import { ManageProfileComponent } from './Components/profile-managament/manage-profile/manage-profile/manage-profile.component';
+import { InactiveListingsComponent } from './Components/profile-managament/manage-listings/inactive-listings/inactive-listings.component';
+import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
+import { allIcons } from 'ngx-bootstrap-icons';
+import {AccountTypeApiService} from "./CarDealerAngular.ApiHandlers/Identity/AccountTypeApi.service";
 
 const routes: Routes =[
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'add-listing', component: AddListingComponent, canActivate: [AuthService]},
+  {path: 'add-listing', component: AddListingComponent, canActivate: [AuthService], resolve:
+      {basicProperties: BasicPropertiesResolver}},
   {path: 'listing/:id', component: ListingPageComponent},
+  {path: 'addCarColor', component: CarcolorComponent},
   {path: 'profile/:Token', component: ProfileManagementComponent, canActivate: [AuthService]},
+  {path: 'update-listing/:id', component: UpdateListingComponent, canActivate: [AuthService], resolve:
+      {resolvedListing: GetListingDtoResolver, basicProperties: BasicPropertiesResolver}},
   {path: '**', component: HomeComponent}
 ];
 
@@ -60,7 +75,12 @@ const routes: Routes =[
     ListingListComponent,
     ListingComponent,
     ListingPageComponent,
-    ProfileManagementComponent
+    ProfileManagementComponent,
+    UpdateListingComponent,
+    CarcolorComponent,
+    ManageListingsComponent,
+    ManageProfileComponent,
+    InactiveListingsComponent,
   ],
   imports: [
     CommonModule,
@@ -80,6 +100,7 @@ const routes: Routes =[
     RouterLink,
     BrowserModule,
     ReactiveFormsModule,
+    NgxBootstrapIconsModule.pick(allIcons)
   ],
   providers: [
     {
@@ -99,7 +120,11 @@ const routes: Routes =[
     ListingApiService,
     PreviouslyDamagedApiService,
     IdentityApiService,
-    GetBasicPropertiesApiService
+    GetBasicPropertiesApiService,
+    GetListingDtoResolver,
+    BasicPropertiesResolver,
+    CarColorApiService,
+    AccountTypeApiService
   ],
   bootstrap: [AppComponent]
 })

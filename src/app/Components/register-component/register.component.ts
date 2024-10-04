@@ -7,6 +7,9 @@ import {ToastService} from "../../Services/ToastService";
 import {IdentityApiService} from "../../CarDealerAngular.ApiHandlers/Identity/IdentityApi.service";
 import {CityDto} from "../../DataTransferObjects/Address/CityDto";
 import {CountryDto} from "../../DataTransferObjects/Address/CountryDto";
+import {AccountTypeDto} from "../../DataTransferObjects/Identity/AccountTypeDto";
+import {AccountTypeApiService} from "../../CarDealerAngular.ApiHandlers/Identity/AccountTypeApi.service";
+import {RegisterDto} from "../../DataTransferObjects/Identity/RegisterDto";
 
 @Component({
   selector: 'app-register-component',
@@ -18,12 +21,15 @@ export class RegisterComponent implements OnInit{
   countryId = 0;
   cityId = 0;
   isSubmitted = false;
+  accountTypeId = 0;
   countries: CountryDto[] = [];
   cities: CityDto[] = [];
+  accountTypes: AccountTypeDto[] = [];
   zipCode?: string;
   constructor(private addressService: AddressApiService,
               private toastService: ToastService,
-              private identityService: IdentityApiService) {
+              private identityService: IdentityApiService,
+              private accountTypeService: AccountTypeApiService) {
   }
 
   ngOnInit() {
@@ -34,19 +40,34 @@ export class RegisterComponent implements OnInit{
       'Password': new FormControl(null, [Validators.required]),
       'ConfirmedPassword': new FormControl(null, [Validators.required]),
       'Country': new FormControl(null, [Validators.required]),
-      'City': new FormControl(null, [Validators.required]),
+      'CityId': new FormControl(null, [Validators.required]),
       'ZipCode': new FormControl(null, [Validators.required]),
-      'AccountType': new FormControl(null, [Validators.required])
+      'AccountTypeId': new FormControl(null, [Validators.required]),
+
     });
     this.addressService.GetCountries().subscribe({
       next:(response) => this.handleGetCountries(response)
     });
+    this.accountTypeService.GetAccountTypes().subscribe({
+      next:(response) => this.handleGetAccountTypes(response),
+      error:(error: ErrorResponse) => console.log(error)
+    })
   }
 
   RegisterUser(){
+    let registerDto: RegisterDto  = {
+      Username: this.registerForm.get("Username")?.value,
+      Password: this.registerForm.get("Password")?.value,
+      ConfirmedPassword: this.registerForm.get("ConfirmedPassword")?.value,
+      PhoneNumber: this.registerForm.get("PhoneNumber")?.value,
+      CityId: this.cityId,
+      Email: this.registerForm.get("Email")?.value,
+      AccountTypeId: this.accountTypeId
+    }
     this.isSubmitted = true;
+    console.log(registerDto)
     if(this.registerForm.valid){
-      this.identityService.Register(this.registerForm.value).subscribe({
+      this.identityService.Register(registerDto).subscribe({
         next:(response) =>{
           console.log(response);
       },
@@ -62,11 +83,15 @@ export class RegisterComponent implements OnInit{
       next:(response) => this.handleGetCitiesByCountryId(response)
     });
     this.registerForm.get('ZipCode')?.reset();
-    this.registerForm.get('City')?.reset(this.cityId = 0);
+    this.registerForm.get('CityId')?.reset(this.cityId = 0);
   }
 
   getZipCode(cityId: number){
     this.zipCode = this.cities.at(cityId - 1)?.ZipCode;
+  }
+
+  private handleGetAccountTypes(response: SuccessResponse<AccountTypeDto[]>){
+    this.accountTypes = response.Result;
   }
 
   private handleGetCountries(response: SuccessResponse<CountryDto[]>){

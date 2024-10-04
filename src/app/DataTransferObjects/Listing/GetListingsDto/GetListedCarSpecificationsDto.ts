@@ -6,6 +6,8 @@ import {DoorQuantityDto} from "../../Cars/DoorQuantityDto";
 import {CarTypeDto} from "../../Cars/CarTypeDto";
 
 export class GetListedCarSpecificationsDto {
+  Id = 0;
+
   CarTypeId = 0;
 
   DoorQuantityId = 0;

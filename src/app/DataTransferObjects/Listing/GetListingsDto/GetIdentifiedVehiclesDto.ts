@@ -10,7 +10,7 @@ export class GetIdentifiedVehiclesDto {
 
   FirstRegistrationDate = '';
 
-  CountryId = 0;
+  CountryOfOriginId = 0;
 
   PreviouslyDamagedId = 0;
 

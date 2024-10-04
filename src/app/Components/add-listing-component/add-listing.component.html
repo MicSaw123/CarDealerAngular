@@ -4,28 +4,28 @@
     <div class="row justify-content-between">
       <div class="col-xs-12 col-lg-2">
         <label>Title:</label>
-        <input [(ngModel)]="listing.Title" type="text" class="input-group-text w-100" id="title" formControlName="title">
+        <input [(ngModel)]="listingDto.Title" type="text" class="input-group-text w-100" id="Title" formControlName="Title">
       </div>
       <div class="col-xs-12 col-lg-2">
         <label>Condition:</label>
-        <select class="form-select" [(ngModel)]="listing.ListedCar.CarConditionId" formControlName="condition">
-          <option *ngFor="let carCondition of basicProperties?.CarCondition" [value]="carCondition.Id" id="carCondition">
+        <select class="form-select" [(ngModel)]="listingDto.ListedCar.CarConditionId" formControlName="Condition">
+          <option *ngFor="let carCondition of basicProperties?.CarCondition" [value]="carCondition.Id" id="CarCondition">
             {{carCondition.Name}}
           </option>
         </select>
       </div>
       <div class="col-xs-12 col-lg-2">
         <label>Production date:</label>
-        <input [(ngModel)]="listing.IdentifiedVehicles.ProductionDate" type="date" class="input-group-text w-100"
-               id="productionDate" formControlName="productionDate">
+        <input [(ngModel)]="listingDto.IdentifiedVehicles.ProductionDate" type="date" class="input-group-text w-100"
+               id="ProductionDate" formControlName="ProductionDate">
       </div>
       <div class="col-xs-12 col-lg-2">
         <label>Mileage:</label>
-        <input [(ngModel)]="listing.ListedCar.Mileage" type="text" class="input-group-text w-100" id="mileage" formControlName="mileage">
+        <input [(ngModel)]="listingDto.ListedCar.Mileage" type="text" class="input-group-text w-100" id="mileage" formControlName="Mileage">
       </div>
       <div class="col-xs-12 col-lg-2">
         <label>Country of origin:</label>
-        <select class="form-select" [(ngModel)]="listing.IdentifiedVehicles.CountryOfOriginId" formControlName="countryOfOrigin">
+        <select class="form-select" [(ngModel)]="listingDto.IdentifiedVehicles.CountryOfOriginId" formControlName="CountryOfOrigin">
           <option *ngFor="let country of basicProperties?.Country" [value]="country.Id" id="countryOfOrigin">
             {{country.Name}}
           </option>
@@ -36,16 +36,17 @@
     <div class="row">
       <div class="col-xs-12 col-lg-4">
         <label>VIN:</label>
-        <input [(ngModel)]="listing.IdentifiedVehicles.Vin" type="text" class="input-group-text" formControlName="vin" id="vin" style="width: 100%">
+        <input [(ngModel)]="listingDto.IdentifiedVehicles.Vin" type="text" class="input-group-text" formControlName="Vin" id="vin" style="width: 100%">
       <label></label>
       </div>
       <div class="col-xs-12 col-lg-4">
         <label>First registration date:</label>
-        <input [(ngModel)]="listing.IdentifiedVehicles.FirstRegistrationDate" type="date" class="input-group-text w-100" id="firstRegistrationDate" formControlName="firstRegistrationDate">
+        <input [(ngModel)]="listingDto.IdentifiedVehicles.FirstRegistrationDate" type="date" class="input-group-text w-100" id="firstRegistrationDate"
+               formControlName="FirstRegistrationDate">
       </div>
       <div class="col-xs-12 col-lg-4">
         <label>License plate:</label>
-        <input [(ngModel)]="listing.ListedCar.LicensePlate" type="text" class="input-group-text w-100" id="licensePlate" formControlName="licensePlate">
+        <input [(ngModel)]="listingDto.ListedCar.LicensePlate" type="text" class="input-group-text w-100" id="licensePlate" formControlName="LicensePlate">
       </div>
     </div>
     <hr>
@@ -53,7 +54,7 @@
       <div class="col-xs-12 col-lg-2">
         <label>Manufacturer:</label>
         <select class="form-select"
-                formControlName="manufacturer"
+                formControlName="Manufacturer"
                 [(ngModel)]="manufacturerId"
                 (change)="onSelectedManufacturer(manufacturerId)"
         >
@@ -75,7 +76,7 @@
         </select>
         </ng-template>
       <ng-template #manufacturerList>
-        <select formControlName="model" class="form-select" [(ngModel)]="modelId" (change)="onSelectedModel(modelId)">
+        <select formControlName="Model" class="form-select" [(ngModel)]="modelId" (change)="onSelectedModel(modelId)">
           <option hidden="hidden" selected >Model</option>
           <option *ngFor="let model of models"
                   id="model"
@@ -96,7 +97,7 @@
           </select>
         </ng-template>
         <ng-template #generationList>
-          <select formControlName="generation" class="form-select" [(ngModel)]="listing.ListedCar.ListedCarSpecification.GenerationId">
+          <select formControlName="Generation" class="form-select" [(ngModel)]="listingDto.ListedCar.ListedCarSpecification.GenerationId">
             <option hidden selected>Generation</option>
             <option *ngFor="let generation of generations"
                     id="generation"
@@ -111,8 +112,8 @@
       <div class="col-xs-12 col-lg-2">
         <label>Chassis:</label>
         <select class="form-select"
-                [(ngModel)]="listing.ListedCar.ListedCarSpecification.CarTypeId"
-                formControlName="carType"
+                [(ngModel)]="listingDto.ListedCar.ListedCarSpecification.CarTypeId"
+                formControlName="CarType"
         >
           <option *ngFor="let carType of basicProperties?.CarType"
                   [value]="carType.Id"
@@ -123,7 +124,7 @@
       </div>
       <div class="col-xs-12 col-lg-2">
         <label>Color:</label>
-        <select formControlName="carColor" class="form-select" [(ngModel)]="listing.ListedCar.CarColorId">
+        <select formControlName="CarColor" class="form-select" [(ngModel)]="listingDto.ListedCar.CarColorId">
           <option *ngFor="let carColor of basicProperties?.CarColor"
           id="carColor" [value]="carColor.Id">
             {{carColor.Name}}
@@ -132,7 +133,7 @@
       </div>
       <div class="col-xs-12 col-lg-2">
         <label>Door quantity:</label>
-        <select formControlName="doorQuantity" class="form-select" [(ngModel)]="listing.ListedCar.ListedCarSpecification.DoorQuantityId">
+        <select formControlName="DoorQuantity" class="form-select" [(ngModel)]="listingDto.ListedCar.ListedCarSpecification.DoorQuantityId">
           <option *ngFor="let doorQuantity of basicProperties?.DoorQuantity" id="doorQuantity" [value]="doorQuantity.Id">
             {{doorQuantity.Doors}}
           </option>
@@ -143,7 +144,7 @@
     <div class="row">
       <div class="col-xs-12 col-lg-3">
         <label>Fuel:</label>
-        <select class="form-select" [(ngModel)]="fuelTypeId" formControlName="fuelType">
+        <select class="form-select" [(ngModel)]="fuelTypeId" formControlName="FuelType">
           <option *ngFor="let fuelType of basicProperties?.FuelType"
                   id="fuelType"
                   [value]="fuelType.Id"
@@ -155,8 +156,8 @@
       <div class="col-xs-12 col-lg-3">
         <label>Engine:</label>
         <select class="form-select"
-                formControlName="engine"
-                [(ngModel)]="listing.ListedCar.ListedCarSpecification.EngineId">
+                formControlName="Engine"
+                [(ngModel)]="listingDto.ListedCar.ListedCarSpecification.EngineId">
           <option *ngFor="let engine of engines"
                   [value]="engine.Id"
                   id="engine">
@@ -166,7 +167,7 @@
       </div>
       <div class="col-xs-12 col-lg-3">
         <label>Transmission type:</label>
-        <select class="form-select" formControlName="transmission" [(ngModel)]="listing.ListedCar.ListedCarSpecification.TransmissionId">
+        <select class="form-select" formControlName="Transmission" [(ngModel)]="listingDto.ListedCar.ListedCarSpecification.TransmissionId">
           <option hidden value="" selected disabled></option>
           <option *ngFor="let transmission of basicProperties?.Transmission"
                   id="transmission"
@@ -178,7 +179,7 @@
       </div>
     <div class="col-xs-12 col-lg-3">
       <label>Drivetrain:</label>
-      <select class="form-select" formControlName="drivetrain" [(ngModel)]="listing.ListedCar.ListedCarSpecification.DrivetrainId">
+      <select class="form-select" formControlName="Drivetrain" [(ngModel)]="listingDto.ListedCar.ListedCarSpecification.DrivetrainId">
         <option hidden value="" selected disabled></option>
         <option *ngFor="let drivetrain of basicProperties?.Drivetrain"
                 id="drivetrain"
@@ -193,19 +194,25 @@
     <div class="row">
       <div class="col-xs-12 col-lg-3">
         <label>Previously damaged:</label>
-        <select class="form-select" id="damageHistory" [(ngModel)]="listing.IdentifiedVehicles.PreviouslyDamagedId" formControlName="previouslyDamaged">
-          <option *ngFor="let prevDamaged of previouslyDamaged" [value]="prevDamaged.Id" id="previouslyDamaged">
+        <select class="form-select" id="damageHistory" [(ngModel)]="listingDto.IdentifiedVehicles.PreviouslyDamagedId"
+                formControlName="PreviouslyDamaged">
+          <option *ngFor="let prevDamaged of basicProperties.PreviouslyDamaged" [value]="prevDamaged.Id" id="previouslyDamaged">
             {{prevDamaged.Name}}
           </option>
         </select>
       </div>
       <div class="col-xs-12 col-lg-3">
         <label>Previous owners:</label>
-        <input [(ngModel)]="listing.ListedCar.PreviousOwners" type="number" class="input-group-text w-100" id="previousOwners" formControlName="previousOwners">
+        <input [(ngModel)]="listingDto.ListedCar.PreviousOwners" type="number" class="input-group-text w-100" id="previousOwners"
+               formControlName="PreviousOwners">
       </div>
-      <div class="col-xs-12 col-lg-6">
+      <div class="col-xs-12 col-lg-3">
+        <label>Price:</label>
+        <input [(ngModel)]="listingDto.Price" formControlName="Price" type="number" class="form-control" id="Price">
+      </div>
+      <div class="col-xs-12 col-lg-3">
         <label>Images:</label>
-        <input formControlName="images" type="file" accept="image/jpeg" multiple class="form-control"
+        <input formControlName="Images" type="file" accept="image/jpeg" multiple class="form-control" id="Images"
                (change)="onFileSelect($event)" style="height: 60%"/>
       </div>
     </div>
@@ -213,7 +220,7 @@
     <div class="row">
       <div class="col-xs-12 col-lg-6">
         <label>Description:</label>
-        <textarea [(ngModel)]="listing.Description" class="form-control" style="height: 400px" id="description" formControlName="description"></textarea>
+        <textarea [(ngModel)]="listingDto.Description" class="form-control" style="height: 400px" id="description" formControlName="Description"></textarea>
       </div>
       <div class="col-xs-12 col-lg-6">
         <label>Preview images:</label>
@@ -239,7 +246,7 @@
     <hr>
     <div class="row">
       <div class="col">
-        <button type="button" class="btn btn-primary w-100" (click)="addListing(listing)">
+        <button [disabled]="images.length < 2" type="button" class="btn btn-primary w-100" (click)="addListing()">
           Add listing
         </button>
       </div>

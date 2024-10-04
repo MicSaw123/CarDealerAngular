@@ -6,6 +6,7 @@ import {SuccessResponse} from "../../Responses/SuccessResponse";
 import {ErrorResponse} from "../../Responses/ErrorResponse";
 import {ToastService} from "../../Services/ToastService";
 import {IdentityApiService} from "../../CarDealerAngular.ApiHandlers/Identity/IdentityApi.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-component',
@@ -14,10 +15,12 @@ import {IdentityApiService} from "../../CarDealerAngular.ApiHandlers/Identity/Id
 })
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
-  Token = new LoginToken();
+  passwordVisibility = false;
+  token = '';
 
   constructor(private toastService: ToastService,
-              private identityService: IdentityApiService
+              private identityService: IdentityApiService,
+              private router: Router
   ) {
   }
   ngOnInit(): void {
@@ -27,15 +30,31 @@ export class LoginComponent implements OnInit{
     });
   }
 
-  LoginUser(login: LoginDto){
+  LoginUser(){
     if(this.loginForm.valid) {
       this.identityService.Login(this.loginForm.value).subscribe(
         {
-          next:(Token: SuccessResponse<LoginToken>) => localStorage.setItem('Token', Token.Result.Token),
-          error:(err: ErrorResponse) => this.toastService.warningToast(err)
+          next:(Token: SuccessResponse<LoginToken>) => {
+            localStorage.setItem('Token', Token.Result.Token);
+            console.log(Token.Result.Token);
+            if(Token.Result.Token != null){
+              this.NavigateToHome();
+            }
+          },
+          error:(err: ErrorResponse) => {
+            console.log(err);
+            this.toastService.warningToast(err)
+          }
         }
       );
     }
+  }
 
+  togglePasswordVisibility(){
+    this.passwordVisibility = !this.passwordVisibility;
+  }
+
+  NavigateToHome(){
+    this.router.navigate(['/']);
   }
 }

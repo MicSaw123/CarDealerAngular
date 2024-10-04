@@ -1,4 +1,6 @@
 export class IdentifiedVehiclesDto{
+  Id = 0;
+
   Vin = '';
 
   ProductionDate = '';

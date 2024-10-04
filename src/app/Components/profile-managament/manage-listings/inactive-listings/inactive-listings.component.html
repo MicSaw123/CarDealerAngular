@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row" *ngFor="let listing of listings">
+    <div class="card">
+      <div class="row">
+        <div class="col-sm-12 col-lg-3">
+          <div class="row">
+            <div [id]="listing.Id" class="carousel slide">
+              <div class="carousel-inner">
+                <div *ngFor="let image of listing.Images; index as i" [ngClass]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+                  <img [src]="'data:image/jpeg;base64,' + image.Image" class="d-block w-100 rounded-3 h-25" alt="Slide" style="height: 400px">
+                </div>
+              </div>
+              <button class="carousel-control-prev" role="button" [attr.data-bs-target]="'#' + listing.Id" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" role="button" [attr.data-bs-target]="'#' + listing.Id" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-lg h-75">
+          <div class="row pt-1">
+            <div class="container">
+              <label>{{listing.Title}}</label>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-lg">
+                <label style="font-size: 13px">Vin: {{listing.IdentifiedVehicles.Vin}}</label>
+                <label style="font-size: 13px; margin-left: 5px">Production date: {{listing.IdentifiedVehicles.ProductionDate}}</label>
+                <label style="font-size: 13px; margin-left: 5px">License plate: {{listing.ListedCar.LicensePlate}}</label>
+              </div>
+            </div>
+            <div class="row justify-content-center pt-3">
+              <button class="btn btn-info w-25" style="margin-left: 10px; margin-right: 10px" (click)="navigateToUpdateListing(listing.Id)"
+              >Update listing</button>
+              <button class="btn btn-danger w-25" style="margin-left: 10px; margin-right: 10px" (click)="deleteListing(listing.Id)">
+                Delete listing</button>
+              <button class="btn btn-dark w-25" style="margin-left: 10px; margin-right: 10px">
+                Deactivate listing</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

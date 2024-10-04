@@ -1,0 +1,140 @@
+<div class="row">
+  <div class="col-sm-12 col-lg-5">
+    <div class="container">
+      <label>Username:</label>
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8">
+              <input [(ngModel)]="userInfo.UserName" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <label>Email:</label>
+      <div class="row pb-1">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8">
+              <input [(ngModel)]="userInfo.Email" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+      <label>Current password:</label>
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8">
+              <div class="input-group">
+                <input [type]="currentPasswordVisibility ? 'text' : 'password'" [(ngModel)]="userInfo.CurrentPassword" class="form-control">
+                  <span class="input-group-text" (click)="toggleCurrentPasswordVisibility()">
+                    <ng-container *ngIf="currentPasswordVisibility; then visible; else hidden"></ng-container>
+                    <ng-template #visible>
+                      <i-bs name="eye-slash"></i-bs>
+                    </ng-template>
+                    <ng-template #hidden>
+                      <i-bs name="eye"></i-bs>
+                    </ng-template>
+                  </span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <label>New password:</label>
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8">
+              <div class="input-group">
+                <input [type]="updatePasswordVisibility ? 'text' : 'password'" [(ngModel)]="userInfo.UpdatedPassword" class="form-control">
+                  <span class="input-group-text" (click)="toggleUpdatedPasswordVisibility()">
+                    <ng-container *ngIf="updatePasswordVisibility; then visible; else hidden"></ng-container>
+                    <ng-template #visible>
+                      <i-bs name="eye-slash"></i-bs>
+                    </ng-template>
+                    <ng-template #hidden>
+                      <i-bs name="eye"></i-bs>
+                    </ng-template>
+                  </span>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <label>Confirm new password:</label>
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8">
+              <div class="input-group">
+                <input [type]="confirmNewPasswordVisibility ? 'text' : 'password'" [(ngModel)]="newPasswordConfirmation" class="form-control">
+                  <span class="input-group-text" (click)="toggleConfirmNewPasswordVisibility()">
+                    <ng-container *ngIf="confirmNewPasswordVisibility; then visible; else hidden"></ng-container>
+                    <ng-template #visible>
+                      <i-bs name="eye-slash"></i-bs>
+                    </ng-template>
+                    <ng-template #hidden>
+                      <i-bs name="eye"></i-bs>
+                    </ng-template>
+                  </span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <label>Phone number:</label>
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-lg-8">
+              <input [(ngModel)]="userInfo.PhoneNumber" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-lg-3">
+              <label>Country:</label>
+            </div>
+            <div class="col-sm-12 col-lg-3">
+              <label>City:</label>
+            </div>
+            <div class="col-sm-12 col-lg-3">
+              <label>Zip-Code:</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-lg-3">
+              <input class="form-control">
+            </div>
+            <div class="col-sm-12 col-lg-3">
+              <input class="form-control">
+            </div>
+            <div class="col-sm-12 col-lg-2">
+              <input class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container">
+          <div class="row">
+              <button class="btn btn-success pt-2"
+                      [disabled]="userInfo.UpdatedPassword != newPasswordConfirmation || newPasswordConfirmation.length === 0
+                      || userInfo.UpdatedPassword === '' || userInfo.CurrentPassword === ''" (click)="UpdateAccountDetails(userInfo)">Update details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@
       <div [id]="listing.Id" class="carousel slide d-flex">
         <div class="carousel-inner">
           <div *ngFor="let image of listing?.Images; index as i" [ngClass]="i === 0 ? 'carousel-item active' : 'carousel-item'">
-            <img [src]="'data:image/jpeg;base64,' + image" class="d-block w-100 rounded-3" alt="Slide" style="height: 400px">
+            <img [src]="'data:image/jpeg;base64,' + image.Image" class="d-block w-100 rounded-3" alt="Slide" style="height: 400px">
           </div>
         </div>
         <button class="carousel-control-prev" role="button" [attr.data-bs-target]="'#' + listing.Id" data-bs-slide="prev">

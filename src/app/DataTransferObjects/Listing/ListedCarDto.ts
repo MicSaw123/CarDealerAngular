@@ -1,6 +1,8 @@
 import {ListedCarSpecificationDto} from "./ListedCarSpecificationDto";
 
 export class ListedCarDto{
+  Id = 0;
+
   LicensePlate: string = '';
 
   PreviousOwners = 0;
